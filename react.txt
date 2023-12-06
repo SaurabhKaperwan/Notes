@@ -1,0 +1,143 @@
+nextjs vs reactjs:
+
+nextjs:
+backend framework based on react.
+used for both server side and client side rendering.
+It also have all react features with extra featues
+like routing, API calls, authentication.
+
+For these feature in react we have externally install
+libraries and dependencies.
+
+To create app:
+npx create-next-app
+
+To run app:
+npm run dev
+
+import React from 'react'
+
+const page = () => {
+    return <h1>hello</h1>
+}
+
+export default page
+
+default => if u are importing this file for another
+file then u can give it any while importing.
+
+JSX => js + xml
+
+const page = () => {
+    const a = 10
+    return (
+        <div>{a}</div> //10
+    )
+}
+
+Real DOM and Virtual DOM
+
+
+Real DOM => Window obj => html => body => div => h1
+
+when we change one element then whole dom tree is
+get updated.
+
+Virtual DOM =>
+make a copys of real DOM
+
+and compare it with main copy when we update a
+elements and then update that particular element only
+and stop from fully DOM rendering.
+
+
+React Fragments:
+<> </>
+use for wrapping
+
+
+"use client";
+
+Hook:
+useState : react variables
+
+import React, {useState} from 'react';
+
+const [marks, setMarks] = useState(80);
+marks => variable
+setMarks => function to update the value
+
+<button onClick = { () => {
+    setMarks(33);
+}}>Update</button>
+
+Props:
+send data from parent to child page
+
+//Home page
+<Header user={user} />
+
+//Header.jsxs
+const Header = (props) => {
+    <h1>{props.user}</h1>
+}
+
+
+Routing:
+jump from one page to another page
+
+React.router very hard
+nextjs make it easy
+
+import Link form "next/link"
+<Link href='/About'>About</Link>
+<Link href='/Courses'>Courses</Link>
+
+for golbal importing:
+import in layout.js
+
+Implementing ajax in react (fetch/Axios):
+
+npm i axios
+axios for api calling
+
+import axios from 'axios'
+
+api = lorem picsum
+
+const [Images, setImages] = useState([])
+
+const getImages = async () => {
+    try {
+        const response = await axios.get("url")
+        const data = response.data
+        setImages(data)
+    }
+    catch(error) {
+        console.log("Error");
+    }
+}
+
+
+
+<div>
+    {Images.map((elem, i) => {
+        return <img
+        key={i}
+        src={elem.download_url}
+        width={300}
+        height={300}
+        />
+    })}
+</div>
+
+
+useEffect(() => {
+    getImages()
+}, [])
+
+
+Two Way Binding:
+u are telling both react and user that u are updating the variable
+
+Dynamic Routing:

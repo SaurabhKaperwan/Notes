@@ -1,0 +1,429 @@
+JS have interpreter.
+
+//hoisting
+use variable before creating it.
+variable and functions are hoisted which means their declaration is moved
+to the top of code.
+
+console.log(a); //undefined
+var a = 10;
+
+undefined => have exitence
+
+not defined => not have exitence
+
+eg: console.log(b);
+
+refrence type value:
+value jisko copy krne pr real copy nhi hoti, balki us main main value ka refrence paas hota hai
+
+primitive type value:
+value jisko copy krne pr real copy hoti hai
+
+var a = 12;
+var b = a;
+//a = 12, b = 12;
+b = b + 2;
+// a = 12 , b = 14;
+
+var a = [12, 13];
+var b = a;
+
+b.pop();
+
+// a = [12], b = [12];
+
+
+var vs const vs let :
+-----------------------
+var => es5
+function scoped
+add itself in window object
+
+let, const => es6
+braces scoped
+doesn;t add itself in window object
+
+function abcd() {
+    for(var i = 1; i < 12; i++) {
+        console.log(i);
+    }
+    console.log(i); // 12
+}
+
+
+JS language doesn't have many things that we can
+use and that things we get from browsers.
+All features that are not part of js but
+we can use it and find it in window object
+
+
+eg:
+alert
+console
+prompt
+clearInterval
+clearTimeout
+document
+fetch
+localStorage
+print
+scroll
+
+
+
+browser context api have
+1.window 2.stack 3.heap
+
+stack:
+all variables or intermediate data stored here
+
+
+ Execution context:
+whenever we run function then function make a imaginary
+container for itself which contains:
+1.variables 2.function inside that parent function
+3.lexical enviroment of that function
+
+this imaginary container called execution context
+
+execution container is a container where the function's
+code is executed and it's creates whenever a function is called.
+
+
+lexical enviroment:
+it tell us which things can be accessed or which not by a function
+
+Copy refrence variable:
+var a = [1, 2, 3];
+var b = [...a]
+... => spread operator
+
+var obj = {name: "saurabh"};
+
+var copyObj = {...obj};
+
+
+
+Truthy vs Falsy
+-----------------
+falsy => 0, false, undefined, null, NaN, document.all
+truthy => all other values
+
+
+for each loop
+--------------
+only works with array
+
+var a = [1, 2, 3, 4];
+
+a.forEach(function(val) {
+    console.log(val + 2);
+});
+
+
+for in loop
+-------------
+for objects we use this
+
+var obj = {
+    name: "saurabh",
+    age: 21
+};
+
+for(var key in obj) {
+    console.log(key);//name age
+    console.log(obj[key]);//saurabh 21
+};
+
+
+Callback function
+------------------
+Function which run after the work is completed
+
+//Run this function after 2000ms
+setTimeout(function() {
+    console.log("2 seconds later");
+}, 2000);
+
+
+First Class Function:
+----------------------
+js have a concept that function can be used
+as a value.
+
+var a = function(){};
+
+
+function abcd(a) {
+    a();//hey
+}
+
+abcd(function(){console.log("hey");})
+
+How array made behind the scene:
+---------------------------------
+
+var arr = [1, 2, 3];
+
+type of [] //object
+
+js convert arr to object
+
+arr = {
+    0: 1,
+    1: 2,
+    2: 3
+};
+
+arr[-1] = 2; //It will run
+
+//To check it is array or object
+
+Array.isArray([]) //true
+Array.isArray({}) //false
+
+
+var a = {
+    name: "Saurabh",
+    age: 23
+};
+
+delete a.age;
+
+console.log(a); // {name: 'Saurabh'}
+
+
+
+
+
+Async JS:
+---------
+sync:
+-----
+one after one work
+jab tk ek command complete na ho, dusra
+start nhi hoga
+
+async:
+------
+saare kaam ek saath start kardo, jiska
+answer phle aajaye uska jawab dedena
+
+How we get to know we are writing async code:
+
+If u are using these:
+setTimeout
+setInterval
+promises
+fetch
+axios
+XMLHttpRequest
+
+async js:
+---------
+Many times our code is dependent on another server
+and we don't know when will answer will return.
+
+sync code
+setTimeout(function(){console.log("hello")}, 2000);//async code
+sync code //this line will run immediately it will not wait for 2000ms
+
+callback func always run after getting answer in async code
+
+
+js is not async
+async mtlb do kaam ek saath krna
+
+
+two stack:main and side
+
+jo bhi main stack par hota hai wo output krta hai
+and jo bhi side stack pr hota hai wo behind the scenes
+processing kr skta hai aur jb uski processing complete ho
+use main stack me aa skta hai.
+
+main stack => execution happens
+
+sync code always move to main stack
+
+async code move to side stack
+
+when main stack is empty then side stack is check
+if it completed work then it is move to main stack.
+
+event loop => it move things from side stack to main stack.
+
+
+js is single threaded
+means js can only one computation at single time.
+
+callback function:
+-------------------
+function which will run only when async code completion is done
+eg:
+var ans =  fetch('url')
+console.log(ans);//run immediately
+
+
+async code likhne ke liye:
+fetch
+XMLHTTPRequest
+axios
+promises
+setTimeout
+setInterval
+
+answer chalane ke liye:
+callbacks
+then catch
+async await
+
+promise have three state: resolve, pending and reject
+
+if resolve => then
+if reject => catch
+
+
+Promise:
+
+var ans = new Promise((res, rej) => {
+    if(true) {
+        return res();
+    }
+    else {
+        return rej();
+    }
+})
+
+
+ans
+.then(function() {
+    console.log("Resolve ho gya");
+});
+.catch(function() {
+    console.log("Resolve nhi hua");
+});
+
+
+//user will ask for a number between 0 se 9 and
+if the number is below 5 resolve if not reject
+
+var ans = new Promise((res, rej) => {
+    var n = Math.floor(Math.random()*10);
+
+    if(n < 5) {
+        return res();
+    }
+
+    else {
+        return rej();
+    }
+})
+
+ans.then(function(){
+    console.log("below");
+})
+.catch(function() {
+    console.log("above");
+})
+
+multiple promises:
+
+var ans = new Promise(function(res, rej) {
+    return res("task 1")
+})
+
+var ans2 = ans.then(function(data) {
+    console.log(data);
+    return new Promise(function(res, rej) {
+        return res("task 2");
+    })
+})
+
+ans2.then(function(data) {
+    console.log(data);
+})
+
+
+async & await:
+--------------
+
+koi bhi esa function jisme app async code likhege,
+kyoki async code hai to aap promises ka  istemaal
+kar skte hai, jb uska answer aayega aapko then lagana
+padega, us then ko lagaane se bachne ke liye, aap
+async await ka use kr skte ho.
+
+async function abcd() {
+    await fetch('')
+    .then(function (raw) {
+        return raw.json()
+    })
+    .then(function (data) {
+        console.log()
+    })
+}
+
+
+async function abcd() {
+    let raw = await fetch('url');
+    let ans = await raw.json();
+    console.log(ans);
+
+    //when any code is async then we have to wait
+    because we don't know when it will give answer
+
+}
+
+
+concurrency:
+js mein sync code and async code ek saath process ho raha hai
+
+parallelism:
+focus jaada karta hai different processors and unke cores par kaam ko chalaane pr
+
+throttling :
+kisi code ko control krna number of execution
+
+
+High Order Functions:
+func which accept a func in a parameter or return a func or both.
+
+function abcd(val) {
+    return function() {}
+}
+
+abcd(function() {})
+
+eg: forEach func
+
+arr.forEach(function() {})
+
+constructor:
+when u are calling it use new keyword
+used when u want to make elements with the same property
+It returns a obj with all of the properties and methods, if we use 'this' keyword inside the func
+
+function bluePrint() {
+    this.width = 12;
+    this.color = brown;
+    this.height = 22;
+}
+
+let val1 = new bluePrint()
+let val2 = new bluePrint()
+
+
+First Class Func:
+-----------------
+In js all functions are first class function
+
+when function is treated as a variable.
+
+u can save them,pass them as arguments
+
+new keyword:
+------------
+
+create a blank

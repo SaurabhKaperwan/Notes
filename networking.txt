@@ -1,0 +1,357 @@
+Network:
+--------
+two or more connected devices
+
+OSI Model:
+Open Systems Interconnection Model
+
+Conceptual framework used to describe the functioning
+of a networking system.
+
+This model characterizes computing functions into a
+universal set of rules and requirement in order to
+support interoperability b/w different products and
+software.
+
+7 Layers:
+
+1.Physical:
+concerned with electically or optically transmitting
+raw unstructred data across the N/W from the physical
+layer of the sending device to the physical layer
+of the receiving device.
+
+2.Data Link:
+Directly connected nodes are used to perform node to
+node data transfer where data is packaged into frames.
+
+Also correct errors that may have occurred at the
+physical layer.
+
+It have 2 sub layers:
+(a).Media Access Control (MAC)
+provides flow control and multiplexing for device
+transmission over a N/W.
+
+(b).LLC(Logical Link Control)
+provides flow and error control over the physical
+medium.
+
+
+3.N/W:
+responsible for receiving frames from DLL, and delivering
+them to their intended destinations among based on the
+addresses contained inside the frame.
+
+
+
+
+How Packets Travels:
+---------------------
+When data leaves ur computer, it is grouped into
+small chunk called Packets.
+
+Host:
+Any sort of end device on the internet.
+
+
+Switch:
+-------
+
+N/W device used to facilitate communication within
+networks.
+
+Operate at layer 2, which means they only look into
+each data-gram up to the Layer 2 header.
+
+Layer 2 header contains info. that enables hop to
+hop delivery, such as MAC addr.
+
+It uses MAC Address table.
+This table maps MAC addr. of devices plugged into
+each switch port.
+
+If a frame does not know the location of destination
+MAC addr., it simply duplicates and floods the frame
+out each switch port except the port it was received on.
+
+Router:
+-------
+Facilitate communication between networks.
+
+Operates at layer 3, which means they only look into
+each datagram up to the layer 3 header.
+
+Layer 3 header contains info. that enables end to end
+delivery, such as IP addr.
+
+Router maintains a Routing Table.
+It contains a paths to all the N/W a router knows
+how to reach.
+
+
+ARP(Address Resolution Protocol):
+---------------------------------
+It is a protocol that dynamic IP addr. to permanent
+physical machine address(MAC) in a LAN.
+
+It is bridge b/w two addressing schems(MAC and IP)
+
+ARP works b/w layer 2 & 3
+
+
+Typically, when 2 hosts are communicating, they already
+know each other's IP addr. Sometimes manually or by another
+protocol (often DNS).
+
+MAC addr. is not known.
+
+The host will use ARP to discover the MAC addr.
+
+ARP use IP addr. to discover MAC addr.
+
+This mapping is added in ARP table.
+
+
+When a client is attempting to speak to a host in the
+same N/W, the client will issue an ARP request for
+the host's MAC addr.
+
+
+Working:
+whenever a new compute joins a LAN, the N/W asigns
+it a unique IP addr.
+
+
+Translate 32 bit (ipv4) addr to 48bit(mac) addr
+
+ARP request is broadcasted.
+
+Routers will inspect the contents of the arp request
+and notice it's not for the routers IP addr. so
+router will silently discard the packet.
+
+If ARP request for a host(in the same N/W) the it will return a ARP
+response.
+
+Then host initiated ARP request will update its ARP Table.
+
+Switch:
+-------
+
+Four functions:
+
+1.Learning:
+-----------
+
+Layer 2 device
+Takes forwarding decision based upon info. found in the L2 header(MAC addr.)
+
+Switch maintains a  MAC Addr Table, mapping each of its
+switchports to the MAC addr of the connected devices.
+
+2.Flooding:
+-----------
+
+If switch receive frame and it don't know MAC addr. then switch will duplicate the frame and send
+it out all ports(Flooding).
+
+3.Forwarding:
+-------------
+
+If MAC addr table for destination MAC:
+
+Three methods to forward frames:
+
+a.Store & Forward:
+-----------------
+switch copies the frame into a memory buffer and
+inspect the frame for errors before forwarding
+it along.
+Slow method buy best error detection.
+
+b.Cut-Through:
+--------------
+switch stores nothing and inspect only bare minimum
+required to read the destination MAC addr. and
+forwards the frame.
+
+c.Fragment Free:
+----------------
+Combination of both
+switch inspects only the first portion of the frame
+(64 bytes) before forwarding the frame along.
+
+4.Filtering:
+------------
+When switch needs to flood a frame - the frame will
+get duplicate and sent out every switchport except
+the switchport which it received the frame.
+
+a.Empty MAC Address Table:
+    Initially, the switch's MAC address table is empty, and it gets populated as frames are received.
+
+b.Source MAC Address Learning:
+    When Host A sends a frame, the switch learns the mapping of the Source MAC address (aaaa.aaaa.aaaa) to the port it came in on (Port 1).
+
+c.Destination MAC Address Lookup:
+    The switch checks its MAC address table to determine the egress port for the Destination MAC address (bbbb.bbbb.bbbb). Since there's no entry, it floods the frame to all ports except the incoming port.
+
+d.Filtering Function:
+    The switch duplicates and floods the frame to all ports, except the one it came in on (Port 1). This is an example of the switch's filtering function to prevent the frame from being sent back to the source.
+
+e.Frame Reception by Hosts:
+    Hosts C and B receive the frame. Host C discards it since the frame is not intended for them, while Host B accepts it as the intended recipient.
+
+f.Response Frame and MAC Address Learning:
+    When Host B generates a response, the switch learns the mapping of the Response Source MAC address (bbbb.bbbb.bbbb) to the port it came in on (Port 2).
+
+g.Destination MAC Address Lookup for Forwarding:
+    The switch looks up the Destination MAC address (aaaa.aaaa.aaaa) in its MAC address table and finds that it is associated with Port 1.
+
+h.Frame Forwarding:
+    The switch forwards the response frame directly to Port 1, knowing the location of the Destination MAC address.
+
+Host to Host through a Router:
+------------------------------
+
+Routing Func.
+-------------
+make decision about where to forward packets based
+on their destination IP addr.
+
+Routing Table contains info. about the best paths
+to reach different networks.
+
+Packet Forwarding function:
+---------------------------
+once determines the next hop for a packet, it forwards
+the packet to next hop.
+
+
+Commands:
+---------
+
+1.ipconfig:
+provides a comprehensive view of info regarding ip addr
+configuration of the device
+
+variations:
+
+ipconfig/all: additional info about network adapters
+
+ipconfig/renew: renew the systems's IP addr.
+
+ipconfig/release: removes system's current IP addr.
+
+2.nslookup:
+used to troubleshoot N/W connectivity issue in the system.
+Also we can get the info about our system's DNS server.
+i.e., domain name & ip addr.
+
+3.hostname:
+display the hostname of the system.
+
+4.ping:
+allow user to check the connectivity of our system
+to another host
+this command sends four experimental packets to the
+destination host to check whether it receives them
+successfully, if so, then, we can communicate with
+the destination host.But in case the packets have not been received, that means, no
+communication can be established with the destination host.
+
+Command to enter in Prompt - ping www.destination_host_name.com
+
+5.tracert:
+used to trace the route during transmission of the
+data packet and also provides hop count.
+
+Using the number of hops and the hop IP address, we can troubleshoot network issues and identify the point
+of the problem during the transmission of the data packet.
+
+Command to enter in Prompt- tracert IP-address OR tracert www.destination_host_name.com
+
+6.netstat:
+displays an overview of all the N/W connections in
+the device.
+
+The table shows detail about the connection
+protocol, address, and the current state of the network.
+
+7.arp:
+used to access the mapping structure of ip addr.
+to the mac addr.
+
+8.systeminfo:
+access the system's hardware and software details,
+such as processor, booting, windows version
+
+API(Application Programming Interface):
+
+S/W interface that allows to applications to
+communicate.
+
+API Gateway:
+Single pt. of entry into modern api enables applications
+
+It has job to protect the critical api traffic
+
+It is a server that acts as an api front-end, receiving
+API requests, enforcing throttling and security policy,
+passing request to the back-end service, and passing
+reponse back to the requester.
+
+functionalities:
+a.Authentication and authorization
+b.rate limiting and throttling
+c.security(https)
+d.load balancing
+e.request routing(route request to appropriate backend
+service)
+
+Caching:
+--------
+
+stores copies of files in order to deliver them
+more quickly.
+
+Process of storing copies of files in cache, or
+temporary location, so that they can access quickly.
+
+Web browsers cache html files, js, and images in
+order to load website faster.
+
+While dns servers cache dns records for faster lookups
+
+CDN servers cache content to reduce latency.
+
+What does a browser cache do?
+
+Every time a user loads a webpage, their browser
+has to download quite a lot of data in order to
+display that webpage. To shorten page load times,
+browsers cache most of the content that appears on
+the webpage, saving a copy of the webpage's content
+on the device’s hard drive.
+
+This way, the next time the user loads the page, most of the content is already stored locally and the page will load much more quickly.
+
+Browsers store these files until their time to live (TTL) expires or until the hard drive cache is full. (TTL is an indication of how
+long content should be cached.) Users can also clear
+their browser cache if desired.
+
+What is CDN caching?
+
+A Content Delivery Network caches content(img, vid, webpage) in
+proxy server that are located closer to end user.
+
+Proxy Server:
+server that receives requests from clients and passses
+them along to other servers)
+
+When a user requests content from a website using a CDN,
+the CDN fetches that content from an origin server,
+and then saves a copy of the content for future
+requests. Cached content remains in the CDN cache
+as long as users continue to request it.
