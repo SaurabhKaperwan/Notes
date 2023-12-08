@@ -15,6 +15,9 @@ npx create-next-app
 To run app:
 npm run dev
 
+
+Using vite:
+npm create vite@latest
 import React from 'react'
 
 const page = () => {

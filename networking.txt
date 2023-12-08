@@ -355,3 +355,70 @@ the CDN fetches that content from an origin server,
 and then saves a copy of the content for future
 requests. Cached content remains in the CDN cache
 as long as users continue to request it.
+
+
+IP address:
+-----------
+required to communicate one computer with another
+computer.
+
+Private IP addr:
+----------------
+used to communicate within the same N/W.
+router assign these addresses
+more secure
+
+Can we trace Private IP Address?
+
+Yes, we can trace Private IP Addresses, but this
+happens only by using other devices on the local
+network. Devices that are connected to the local
+network has private IP Address and this can only be
+visible to the devices that are connected within
+that network. But it can’t be seen online as it
+happens in public IP Addresses.
+
+
+Public IP addr:
+---------------
+
+addr. that is used to communicate outside the N/W
+
+Assigned by ISP
+
+2 types:
+Dynamic IP:
+-----------
+change over time
+After establishing a connection of a smartphone or
+computer with the Internet, ISP provides an IP
+Address to the device
+
+Static IP:
+----------
+do not change with time
+permanent addr
+mostly used by dns
+
+Can we trace Public IP Address?
+
+Yes, Public IP Addresses can be traced back to the
+Internet Service Provider that can easily trace the
+geographical location. This might reveal the location
+very easily to advertisers, hackers, etc. For using
+the Internet anonymously, you can easily hide your
+IP Address by using different ways like VPN, Tor
+Browser, etc.
+
+
+Gateway:
+--------
+device which acts like a "gate" among networks.
+Act as a node which acts as an entrance for other
+nodes in the N/W.
+
+main function is to translate one protocol to the
+other for networks which have different set of protocols.
+
+
+upto layer 5

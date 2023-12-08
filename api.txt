@@ -1,0 +1,54 @@
+API(Application Programming Interface):
+---------------------------------------
+set of commands, functions, protocols, and objects that we can use
+to create S/W or interact with an extrenal system.
+
+Endpoint:
+---------
+It is a URL or URI(Uniform Resorce Identifier) that an API exposes to allow
+communication with other S/W.
+
+It represent a specific function or resource in a web service.
+
+When u make a request to an API, u typically use the API endpoint to
+specify the operation u want to perform or the data u want to retrieve.
+
+API Path/ Params:
+------------------
+
+To get specific data:
+
+
+api-endpoint/path
+
+api-endpoint/path?contains=params
+api-endpoint/path?contains=params1&type=params2
+
+contains and type are keys and params are value.
+
+API Authentication:
+-------------------
+
+To check how often a specific user is using an api.
+
+Every user have a secret and particular key
+
+api-endpoint?appid=key
+
+
+Postman:
+--------
+Testing an API with browser is very difficult when
+number of params increases.
+
+Therefore we use Postman application.
+
+JSON(JavaScript Object Notation):
+---------------------------------
+
+In JS:
+------
+var obj = {
+    doors: 2,
+    color: "red"
+}
